@@ -11,7 +11,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 @st.cache_data
 def load_text():
-    with open("Teaching-in-a-Digital-Age.txt", "rb") as file:
+    with open("teaching-in-a-digital-age.txt", "rb") as file:
         raw_bytes = file.read()
         return raw_bytes.decode("utf-8", errors="ignore")  # or "replace"
         
