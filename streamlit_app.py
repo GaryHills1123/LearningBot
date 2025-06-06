@@ -5,7 +5,6 @@ from langchain.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
-import pdfplumber
 
 # Set OpenAI key from Hugging Face secret
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
@@ -13,9 +12,8 @@ os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 # Load and prepare book text
 @st.cache_data
 def load_text():
-    with pdfplumber.open("Teaching-in-a-Digital-Age-Second-Edition-1571759822.pdf") as pdf:
-        return "\n".join([page.extract_text() for page in pdf.pages if page.extract_text()])
-
+    with open("teaching-in-a-digital-age.txt", "r", encoding="utf-8") as file:
+        return file.read()
 @st.cache_resource
 def setup_qa():
     full_text = load_text()
