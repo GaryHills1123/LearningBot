@@ -9,11 +9,12 @@ from langchain.chains import RetrievalQA
 # Set OpenAI key from Hugging Face secret
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
-# Load and prepare book text
 @st.cache_data
 def load_text():
-    with open("teaching-in-a-digital-age.txt", "r", encoding="utf-8") as file:
-        return file.read()
+    with open("Teaching-in-a-Digital-Age.txt", "rb") as file:
+        raw_bytes = file.read()
+        return raw_bytes.decode("utf-8", errors="ignore")  # or "replace"
+        
 @st.cache_resource
 def setup_qa():
     full_text = load_text()
